@@ -1,0 +1,32 @@
+name: CI Pipeline  # Name of your workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push events to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Operating system for the job
+
+    steps:
+      - name: Checkout repository  # Action to checkout your repository
+        uses: actions/checkout@v2  # Use the latest version of checkout action
+
+      - name: Set up Python  # Action to set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Specify Python version
+
+      - name: Install dependencies  # Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Adjust based on your project setup
+
+      - name: Execute Python script  # Execute your Python script or command
+        run: python path/to/your/script.py
+
+      # Add more steps as needed for testing, linting, building, etc.
