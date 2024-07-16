@@ -15,10 +15,10 @@ def setup_sonar(sonarqube_server,key,name,login,password):
     }
 
     # Path to SonarScanner executable
-    sonar_scanner_path = r'C:\sonar-scanner-6.1.0.4477-windows-x64\bin\sonar-scanner.bat'
+    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux\bin\sonar-scanner.bat'
 
     # Path to project directory
-    project_dir = r'C:\sonar-scanner-6.1.0.4477-windows-x64\src\calculator-for-commitpower'
+    project_dir = r'sonar-scanner-4.7.0.2747-linux\src\{projectName}'
 
     # Write sonar.properties file
     sonar_properties_file = os.path.join(project_dir, 'sonar-project.properties')
