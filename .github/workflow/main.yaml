@@ -1,4 +1,4 @@
-name: Code Score
+name: Run SonarQube Analysis
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  score:
+  sonar_analysis:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,22 +25,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Calculate code score
-        id: score
+      - name: Install SonarQube Scanner
         run: |
-          score=$(python main_sonarqube.py ${{ github.sha }})
-          echo "::set-output name=score::$score"
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+          unzip sonar-scanner-cli-4.7.0.2747-linux.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.7.0.2747-linux/bin
 
-      - name: Create status check
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const { context, github } = require('@actions/github');
-            const score = '${{ steps.score.outputs.score }}';
-            github.repos.createCommitStatus({
-              ...context.repo,
-              sha: context.sha,
-              state: 'success',
-              description: `Code score: ${score}`,
-              context: 'Code Score'
-            });
+      - name: Run analysis
+        run: |
+          python main_sonarqube.py
