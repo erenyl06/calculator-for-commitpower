@@ -1,0 +1,8 @@
+# config.yaml
+
+sonarqube_server: 'http://localhost:9000'
+project_key: 'calculator-for-commitpower'
+username: 'admin'
+password: 'eren500'
+github_url: 'https://github.com/emirelcuk/calculator-for-commitpower'
+new_location: 'C:/sonar-scanner-6.1.0.4477-windows-x64/src'
