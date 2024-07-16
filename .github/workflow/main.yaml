@@ -1,32 +1,46 @@
-name: CI Pipeline  # Name of your workflow
+name: Code Score
 
 on:
   push:
     branches:
-      - main  # Trigger on push events to the main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Operating system for the job
+  score:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository  # Action to checkout your repository
-        uses: actions/checkout@v2  # Use the latest version of checkout action
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Python  # Action to set up Python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Specify Python version
+          python-version: '3.x'
 
-      - name: Install dependencies  # Install project dependencies
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Adjust based on your project setup
+          pip install -r requirements.txt
 
-      - name: Execute Python script  # Execute your Python script or command
-        run: python path/to/your/script.py
+      - name: Calculate code score
+        id: score
+        run: |
+          score=$(python main_sonarqube.py ${{ github.sha }})
+          echo "::set-output name=score::$score"
 
-      # Add more steps as needed for testing, linting, building, etc.
+      - name: Create status check
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { context, github } = require('@actions/github');
+            const score = '${{ steps.score.outputs.score }}';
+            github.repos.createCommitStatus({
+              ...context.repo,
+              sha: context.sha,
+              state: 'success',
+              description: `Code score: ${score}`,
+              context: 'Code Score'
+            });
