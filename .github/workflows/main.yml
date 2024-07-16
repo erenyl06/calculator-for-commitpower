@@ -43,12 +43,12 @@ jobs:
           python -c "import requests; print(requests.__version__)"
           python -c "import yaml; print(yaml.__version__)"
 
-      - name: Install SonarQube Scanner
+      - name: Download and install sonar-scanner
         run: |
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
           unzip sonar-scanner-cli-4.7.0.2747-linux.zip
-          echo "$(pwd)/sonar-scanner-4.7.0.2747-linux/bin" >> $GITHUB_PATH
-          sonar-scanner --version  # Verify SonarScanner installation
+          export PATH="$PATH:$(pwd)/sonar-scanner-4.7.0.2747-linux/bin"
+
 
 
       - name: Run SonarQube analysis
