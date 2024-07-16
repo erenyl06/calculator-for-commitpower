@@ -1,15 +1,12 @@
-name: Run SonarQube Analysis
+name: SonarQube Analysis
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Replace with your branch name
 
 jobs:
-  sonar_analysis:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,20 +16,26 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Specify your Python version
+
+      - name: Upgrade pip and setuptools
+        run: |
+          python -m pip install --upgrade pip setuptools
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install requests==2.28.1 PyYAML==6.0
+          python -m pip install requests==2.28.1
+          python -m pip install PyYAML==6.0
 
-
-      - name: Install SonarQube Scanner
+      - name: Verify installation
         run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-          unzip sonar-scanner-cli-4.7.0.2747-linux.zip
-          export PATH=$PATH:$(pwd)/sonar-scanner-4.7.0.2747-linux/bin
+          python -c "import requests; print(requests.__version__)"
+          python -c "import yaml; print(yaml.__version__)"
 
-      - name: Run analysis
-        run: |
-          python main_sonarqube.py
+      - name: Run SonarQube analysis
+        run: python main_sonarqube.py 
+
+      - name: Upload SonarQube results
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: './sonarqube-report.sarif'
