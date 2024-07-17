@@ -24,6 +24,9 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/commits/${{ github.sha }}/comments
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            **Commit Score: ${{ env.SCORE }}**
+          request: |
+            {
+              "body": "**Commit Score: ${{ env.SCORE }}**"
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
