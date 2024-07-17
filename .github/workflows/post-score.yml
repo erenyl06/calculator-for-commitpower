@@ -1,4 +1,4 @@
-name: Post Commit Score
+name: Update Commit Status with Score
 
 on:
   push:
@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  post-score:
+  update-commit-status:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
