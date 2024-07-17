@@ -1,0 +1,27 @@
+name: Post Commit Score
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  post-score:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Calculate score
+        run: |
+          SCORE=$(shuf -i 0-100 -n 1)
+          echo "SCORE=$SCORE" >> $GITHUB_ENV
+
+      - name: Post commit score
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          commit_sha: ${{ github.sha }}
+          body: |
+            **Commit Score: ${{ env.SCORE }}**
