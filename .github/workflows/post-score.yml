@@ -8,20 +8,22 @@ on:
 jobs:
   post-score:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Calculate score
+        id: calculate-score
         run: |
           SCORE=$(shuf -i 0-100 -n 1)
           echo "SCORE=$SCORE" >> $GITHUB_ENV
+          echo "Commit Score: $SCORE"
 
       - name: Post commit score
-        uses: peter-evans/create-or-update-comment@v1
+        uses: octokit/request-action@v2.x
         with:
+          route: POST /repos/${{ github.repository }}/commits/${{ github.sha }}/comments
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          commit_sha: ${{ github.sha }}
           body: |
             **Commit Score: ${{ env.SCORE }}**
