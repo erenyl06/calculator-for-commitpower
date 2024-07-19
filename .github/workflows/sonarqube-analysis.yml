@@ -39,7 +39,7 @@ jobs:
 
       - name: List files for debugging
         run: |
-          which sonar-scanner
+          ls -R
 
       - name: Check Java version
         run: java -version
