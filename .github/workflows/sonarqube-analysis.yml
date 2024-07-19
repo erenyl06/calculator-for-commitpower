@@ -19,6 +19,10 @@ jobs:
           distribution: 'adopt'
           java-version: '17'  # Update to Java 17
 
+      - name: Check Java version
+        run: java -version
+
+
       - name: Install SonarScanner
         run: |
           wget -qO- https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -O sonar-scanner.zip
