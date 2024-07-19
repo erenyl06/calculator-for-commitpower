@@ -52,7 +52,8 @@ jobs:
 
       - name: Install SonarScanner
         run: |
-          wget -qO- https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip | bsdtar -xf-
+          wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+          unzip -q sonar-scanner.zip
 
       - name: Run SonarQube Scanner
         env:
