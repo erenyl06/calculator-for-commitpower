@@ -16,7 +16,7 @@ def setup_sonar(sonarqube_server, key, name, login, password):
     }
 
     # Path to SonarScanner executable
-    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar.sh console'
+    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner'
 
     base_path = 'sonar-scanner-4.7.0.2747-linux/src'
     
