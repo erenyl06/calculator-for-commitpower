@@ -4,10 +4,14 @@ import yaml
 from sonarqube import get_sonarqube_data
 from repository import clone_and_move_repo
 from run_sonar_scanner import setup_sonar
-# Load configuration
-with open('config.yaml', 'r') as file:
-    config = yaml.safe_load(file)
 
+# Get the absolute path to the config.yaml file
+base_path = os.path.dirname(__file__)
+config_path = os.path.join(base_path, 'config.yaml')
+
+# Load the YAML file
+with open(config_path, 'r') as file:
+    config = yaml.safe_load(file)
 
 sonarqube_server = config['sonarqube_server']
 project_key = config['project_key']
