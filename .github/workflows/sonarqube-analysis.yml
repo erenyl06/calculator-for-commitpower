@@ -31,13 +31,6 @@ jobs:
       - name: Check Java version
         run: java -version
 
-      - name: Run SonarQube analysis
-        run: |
-          chmod +x ./sonar-scanner-script.sh
-          ./sonar-scanner-script.sh
-        env:
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v2
