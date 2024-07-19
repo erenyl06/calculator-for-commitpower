@@ -16,7 +16,7 @@ def setup_sonar(sonarqube_server, key, name, login, password):
     }
 
     # Path to SonarScanner executable
-    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner'
+    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar.sh console'
 
     base_path = 'sonar-scanner-4.7.0.2747-linux/src'
     
@@ -51,5 +51,5 @@ def setup_sonar(sonarqube_server, key, name, login, password):
 
 
 if __name__ == "__main__":
-    setup_sonar('https://dead-84-51-5-150.ngrok-free.app', 'calculator-for-commitpower', 'calculator-for-commitpower', 'admin', 'eren500')
+    setup_sonar(sonarqube_serve',name , name, login, password)
 
