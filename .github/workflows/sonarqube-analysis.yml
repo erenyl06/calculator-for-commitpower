@@ -25,16 +25,6 @@ jobs:
       - name: Extract SonarScanner
         run: unzip sonar-scanner.zip -d $GITHUB_WORKSPACE
 
-      - name: Run SonarScanner
-        run: |
-          sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -D sonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.projectKey=calculator-for-commitpower \
-            -Dsonar.projectName=calculator-for-commitpower \
-            -Dsonar.sources=. \
-            -Dsonar.java.binaries=.
-
       #- name: Install SonarScanner
        # run: |
        #   wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
