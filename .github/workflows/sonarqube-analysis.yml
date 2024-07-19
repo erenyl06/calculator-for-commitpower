@@ -21,13 +21,26 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt' # Use 'adopt' for Adoptium, or 'zulu' for Azul Zulu, or 'temurin' for Eclipse Temurin
+          distribution: 'adopt'
 
+      - name: Update package lists
+        run: sudo apt-get update
+
+      - name: Upgrade existing packages
+        run: sudo apt-get upgrade -y
 
       - name: Install Docker
         run: |
+          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
           sudo apt-get update
-          sudo apt-get install -y docker.io
+          sudo apt-get install -y docker-ce
+
+      - name: Clean up package manager
+        run: |
+          sudo apt-get autoremove -y
+          sudo apt-get clean
 
       - name: Start SonarQube
         run: |
