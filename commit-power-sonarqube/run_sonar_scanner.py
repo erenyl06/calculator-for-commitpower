@@ -1,4 +1,3 @@
-
 import os
 import subprocess
 
@@ -51,5 +50,5 @@ def setup_sonar(sonarqube_server, key, name, login, password):
 
 
 if __name__ == "__main__":
-    setup_sonar(sonarqube_serve',name , name, login, password)
+    setup_sonar(sonarqube_serve, name, name, login, password)
 
