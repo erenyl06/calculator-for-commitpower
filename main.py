@@ -23,6 +23,7 @@ secim = input("Seçiminizi yapın (1, 2, 3 veya 4): ")
 sayi1 = float(input("Birinci sayıyı girin: "))
 sayi2 = float(input("İkinci sayıyı girin: "))
 
+
 if secim == "1":
     sonuc = toplama(sayi1, sayi2)
     print(f"{sayi1} + {sayi2} = {sonuc}")
