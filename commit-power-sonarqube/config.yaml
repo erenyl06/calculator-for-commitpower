@@ -3,6 +3,6 @@
 sonarqube_server: 'https://dead-84-51-5-150.ngrok-free.app'
 project_key: 'calculator-for-commitpower'
 username: 'admin'
-password: 'eren500'
+password: 'admin '
 github_url: 'https://github.com/emirelcuk/calculator-for-commitpower'
 new_location: 'sonar-scanner-4.7.0.2747-linux/src'
