@@ -1,4 +1,4 @@
-name: Run SonarQube Analysis
+name: SonarQube Analysis
 
 on:
   push:
@@ -6,61 +6,55 @@ on:
       - main
 
 jobs:
-  build:
+  sonarqube:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:20.10.7
-        options: --privileged
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - name: Set up Java 17
+        uses: actions/setup-java@v2
         with:
-          java-version: '17'
           distribution: 'adopt'
-
-      - name: Update package lists
-        run: sudo apt-get update
-
-      - name: Upgrade existing packages
-        run: sudo apt-get upgrade -y
-
-      - name: Install Docker
-        run: |
-          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install -y docker-ce
-
-      - name: Clean up package manager
-        run: |
-          sudo apt-get autoremove -y
-          sudo apt-get clean
-
-      - name: Start SonarQube
-        run: |
-          docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
-
-      - name: Wait for SonarQube to start
-        run: |
-          sleep 30 # Adjust time if needed
+          java-version: '17'
 
       - name: Install SonarScanner
         run: |
           wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
           unzip -q sonar-scanner.zip
 
-      - name: Run SonarQube Scanner
+      - name: List files for debugging
+        run: |
+          ls -R
+
+      - name: Check Java version
+        run: java -version
+
+      - name: Run SonarQube analysis
+        run: |
+          chmod +x ./sonar-scanner-script.sh
+          ./sonar-scanner-script.sh
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Run SonarQube results script
+        run: |
+          python main.py
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -X \
-            -Dsonar.projectKey=your_project_key \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9000 \
-            -Dsonar.login=$SONAR_TOKEN
+
+
+
+
+    
