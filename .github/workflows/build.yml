@@ -22,18 +22,17 @@ jobs:
           sudo apt-get install -y wget unzip
           wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
           unzip sonar-scanner.zip -d $HOME
-          echo "export PATH=$HOME/sonar-scanner-4.7.0.2747-linux/bin:\$PATH" >> $HOME/.bashrc
-          source $HOME/.bashrc
 
       - name: Verify SonarScanner installation
-        run: sonar-scanner --version
+        run: $HOME/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner --version
 
       - name: Run SonarQube scan
         run: |
-          sonar-scanner \
+          $HOME/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_organization \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=your_sonar_token
         env:
-          JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk
+          JAVA_HOME: /opt/hostedtoolcache/Java_Adopt_jdk/17.0.12-7/x64
+          JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Adopt_jdk/17.0.12-7/x64
