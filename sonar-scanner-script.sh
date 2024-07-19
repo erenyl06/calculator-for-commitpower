@@ -4,7 +4,7 @@
 set -e
 
 # Variables
-SONAR_SCANNER_HOME='./sonar-scanner'
+SONAR_SCANNER_HOME='./sonar-scanner-4.7.0.2747-linux'
 SONAR_HOST_URL='https://dead-84-51-5-150.ngrok-free.app' # Your ngrok URL
 
 # Navigate to the directory to be scanned
