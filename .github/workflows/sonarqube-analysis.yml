@@ -23,7 +23,8 @@ jobs:
 
       - name: Run SonarScanner
         run: |
-          ls -R
+          cd sonar-scanner-4.7.0.2747-linux/bin
+          sonar-scanner
 
 
 #jobs:
