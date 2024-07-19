@@ -1,6 +1,6 @@
 # config.yaml
 
-sonarqube_server: 'http://localhost:9000'
+sonarqube_server: 'https://dead-84-51-5-150.ngrok-free.app'
 project_key: 'calculator-for-commitpower'
 username: 'admin'
 password: 'eren500'
