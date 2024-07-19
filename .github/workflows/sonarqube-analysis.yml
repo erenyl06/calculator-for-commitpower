@@ -43,7 +43,7 @@ jobs:
 
       - name: Run SonarQube results script
         run: |
-          python main.py
+          python commit-power-sonarqube main_sonarqube.py
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
