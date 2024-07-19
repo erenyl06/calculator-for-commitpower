@@ -16,6 +16,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install SonarScanner
+        run: |
+          wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+          unzip -q sonar-scanner.zip
+
       - name: Run SonarScanner
         run: |
           sonar-scanner
