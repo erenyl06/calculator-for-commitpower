@@ -21,7 +21,8 @@ jobs:
 
       - name: Install SonarScanner
         run: |
-          wget -qO- https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip | bsdtar -xf-
+          wget -qO- https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -O sonar-scanner.zip
+          unzip sonar-scanner.zip
           mv sonar-scanner-4.7.0.2747-linux sonar-scanner
 
       - name: Run SonarQube analysis
@@ -43,6 +44,6 @@ jobs:
 
       - name: Run SonarQube results script
         run: |
-          python commit-power-sonarqube/main_sonarqube.py
+          python scripts/main.py
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
