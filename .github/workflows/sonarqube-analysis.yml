@@ -4,20 +4,30 @@ on:
   push:
     branches:
       - main
-
 jobs:
-  sonarqube:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
           java-version: '17'
+      - run: ./gradlew build
+
+
+#jobs:
+#  sonarqube:
+#    runs-on: ubuntu-latest
+
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+
+#      - name: Set up Java 17
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: '17'
       
 
       #- name: Download SonarScanner
