@@ -1,3 +1,4 @@
+
 import os
 import subprocess
 
@@ -17,11 +18,17 @@ def setup_sonar(sonarqube_server,key,name,login,password):
     # Path to SonarScanner executable
     sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner.bat'
 
-    # Path to project directory
-    project_dir = r'sonar-scanner-4.7.0.2747-linux/src/{projectName}'
+    base_path = 'sonar-scanner-4.7.0.2747-linux/src'
+    
+    # Construct the path with project name
+    project_path = os.path.join(base_path, project_name)
+    
+    # Create the directories if they do not exist
+    os.makedirs(project_path, exist_ok=True)
+    
+    # Construct the path for the properties file
+    sonar_properties_file = os.path.join(project_path, 'sonar-project.properties')
 
-    # Write sonar.properties file
-    sonar_properties_file = os.path.join(project_dir, 'sonar-project.properties')
     with open(sonar_properties_file, 'w') as f:
         for key, value in sonar_properties.items():
             f.write(f'{key}={value}\n')
@@ -30,7 +37,7 @@ def setup_sonar(sonarqube_server,key,name,login,password):
 
     # Run SonarScanner
     try:
-        result = subprocess.run([sonar_scanner_path], cwd=project_dir, capture_output=True)
+        result = subprocess.run([sonar_scanner_path], cwd=project_path, capture_output=True)
         print(result.stdout.decode('utf-8'))
         print(result.stderr.decode('utf-8'))
 
