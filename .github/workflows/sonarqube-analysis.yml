@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'adopt' # Use 'adopt' for Adoptium, or 'zulu' for Azul Zulu, or 'temurin' for Eclipse Temurin
+
 
       - name: Install Docker
         run: |
