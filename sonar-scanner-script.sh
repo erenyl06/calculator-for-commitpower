@@ -4,7 +4,7 @@
 set -e
 
 # Variables
-SONAR_SCANNER_HOME='C:\Masaüstü\sonar-scanner-6.1.0.4477-windows-x64'
+SONAR_SCANNER_HOME='C:\sonar-scanner-6.1.0.4477-windows-x64'
 
 # Navigate to the directory to be scanned
 cd $GITHUB_WORKSPACE
