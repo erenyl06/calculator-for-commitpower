@@ -31,8 +31,8 @@ jobs:
 
       - name: Run SonarQube analysis
         run: |
-          chmod +x ./scripts/sonar-scanner-script.sh
-          ./scripts/sonar-scanner-script.sh
+          chmod +x ./sonar-scanner-script.sh
+          ./sonar-scanner-script.sh
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -48,6 +48,6 @@ jobs:
 
       - name: Run SonarQube results script
         run: |
-          python scripts/main.py
+          python main.py
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
