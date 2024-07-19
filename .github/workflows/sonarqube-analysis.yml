@@ -18,13 +18,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
-      - name: Download SonarScanner
-        run: |
-          wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-          unzip sonar-scanner.zip -d $GITHUB_WORKSPACE
-          ls -l $GITHUB_WORKSPACE/sonar-scanner-4.7.0.2747-linux/bin
-          echo "SonarScanner installed in: $GITHUB_WORKSPACE/sonar-scanner-4.7.0.2747-linux/bin"
-
+      
 
       #- name: Download SonarScanner
       #  run: wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
@@ -32,10 +26,10 @@ jobs:
       #- name: Extract SonarScanner
       #  run: unzip sonar-scanner.zip -d $GITHUB_WORKSPACE
 
-      #- name: Install SonarScanner
-       # run: |
-       #   wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-       #   unzip -q sonar-scanner.zip
+      - name: Install SonarScanner
+        run: |
+          wget -qO sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+          unzip -q sonar-scanner.zip
 
       - name: List files for debugging
         run: |
