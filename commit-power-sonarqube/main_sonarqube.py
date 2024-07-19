@@ -4,6 +4,7 @@ import yaml
 from sonarqube import get_sonarqube_data
 from repository import clone_and_move_repo
 from run_sonar_scanner import setup_sonar
+import os
 
 # Get the absolute path to the config.yaml file
 base_path = os.path.dirname(__file__)
