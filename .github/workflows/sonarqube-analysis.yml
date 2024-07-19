@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '17'  # Ensure Java 17 is used
+          java-version: '17'
 
       - name: Install SonarScanner
         run: |
@@ -28,6 +28,9 @@ jobs:
       - name: List files for debugging
         run: |
           ls -R
+
+      - name: Check Java version
+        run: java -version
 
       - name: Run SonarQube analysis
         run: |
