@@ -1,4 +1,4 @@
-name: Build and Analyze
+name: Bomba
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Build and Analyze
+    name: Bomba
     runs-on: ubuntu-latest
 
     steps:
