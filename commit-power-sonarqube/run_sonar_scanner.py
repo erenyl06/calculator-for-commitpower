@@ -14,11 +14,13 @@ def setup_sonar(sonarqube_server, key, name, login, password):
         'sonar.password': password
     }
 
-    # Path to SonarScanner executable
-    sonar_scanner_path = r'./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner'
 
-    base_path = 'sonar-scanner-4.7.0.2747-linux/src'
-    
+    # Correct path to SonarScanner executable
+    sonar_scanner_path = os.path.join(os.getcwd(), 'sonar-scanner-4.7.0.2747-linux', 'bin', 'sonar-scanner')
+
+    # Base path for the project
+    base_path = os.path.join(os.getcwd(), 'sonar-scanner-4.7.0.2747-linux', 'src')
+
     # Construct the path with project name
     project_path = os.path.join(base_path, name)
     
@@ -27,6 +29,16 @@ def setup_sonar(sonarqube_server, key, name, login, password):
     
     # Construct the path for the properties file
     sonar_properties_file = os.path.join(project_path, 'sonar-project.properties')
+
+    # Path to SonarScanner executable
+    #sonar_scanner_path = r'./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner'
+    #base_path = 'sonar-scanner-4.7.0.2747-linux/src'    
+    # Construct the path with project name
+    #project_path = os.path.join(base_path, name)    
+    # Create the directories if they do not exist
+    #os.makedirs(project_path, exist_ok=True)    
+    # Construct the path for the properties file
+    #sonar_properties_file = os.path.join(project_path, 'sonar-project.properties')
 
     with open(sonar_properties_file, 'w') as f:
         for key, value in sonar_properties.items():
