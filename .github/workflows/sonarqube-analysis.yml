@@ -23,7 +23,7 @@ jobs:
 
       - name: Run SonarScanner
         run: |
-          sonar-scanner
+          ls -R
 
 
 #jobs:
