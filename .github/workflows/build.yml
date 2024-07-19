@@ -21,12 +21,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wget unzip
           wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-          unzip sonar-scanner.zip
-          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+          unzip sonar-scanner.zip -d $HOME
+          export PATH=$PATH:$HOME/sonar-scanner-4.6.2.2472-linux/bin
 
       - name: Run SonarQube scan
         run: |
-          sonar-scanner \
+          $HOME/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_organization \
             -Dsonar.host.url=https://sonarcloud.io \
