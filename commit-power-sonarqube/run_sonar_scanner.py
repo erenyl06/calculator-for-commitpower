@@ -3,7 +3,7 @@ import os
 import subprocess
 
 
-def setup_sonar(sonarqube_server,key,name,login,password):
+def setup_sonar(sonarqube_server, key, name, login, password):
     # Define project and SonarQube properties
     sonar_properties = {
         'sonar.host.url': sonarqube_server,
@@ -11,12 +11,12 @@ def setup_sonar(sonarqube_server,key,name,login,password):
         'sonar.projectName': name,
         'sonar.projectVersion': '1.0',
         'sonar.sources': '.',
-        'sonar.login':login,
-        'sonar.password':password
+        'sonar.login': login,
+        'sonar.password': password
     }
 
     # Path to SonarScanner executable
-    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin//sonar.sh console'
+    sonar_scanner_path = r'sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner'
 
     base_path = 'sonar-scanner-4.7.0.2747-linux/src'
     
@@ -51,4 +51,5 @@ def setup_sonar(sonarqube_server,key,name,login,password):
 
 
 if __name__ == "__main__":
-    setup_sonar()
+    setup_sonar('https://dead-84-51-5-150.ngrok-free.app', 'calculator-for-commitpower', 'calculator-for-commitpower', 'admin', 'eren500')
+
