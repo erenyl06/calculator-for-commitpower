@@ -21,7 +21,7 @@ def setup_sonar(sonarqube_server,key,name,login,password):
     base_path = 'sonar-scanner-4.7.0.2747-linux/src'
     
     # Construct the path with project name
-    project_path = os.path.join(base_path, projectName)
+    project_path = os.path.join(base_path, name)
     
     # Create the directories if they do not exist
     os.makedirs(project_path, exist_ok=True)
