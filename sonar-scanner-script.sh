@@ -11,7 +11,7 @@ SONAR_HOST_URL='http://dead-84-51-5-150.ngrok-free.app' # Your ngrok URL
 cd $GITHUB_WORKSPACE
 
 # Run SonarScanner
-$SONAR_SCANNER_HOME/bin/sonar-scanner \
+$SONAR_SCANNER_HOME/bin/sonar-scanner -X \
   -Dsonar.projectKey=your_project_key \
   -Dsonar.sources=. \
   -Dsonar.host.url=$SONAR_HOST_URL \
