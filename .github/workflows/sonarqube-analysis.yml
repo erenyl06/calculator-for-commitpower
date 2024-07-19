@@ -1,0 +1,34 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main  # or any other branch you want to trigger the workflow on
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11' # Adjust if you need a different version
+
+      - name: Install SonarScanner
+        run: |
+          wget -qO- https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip | bsdtar -xf-
+          mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+
+      - name: Run SonarQube analysis
+        run: |
+          chmod +x ./scripts/sonar-scanner-script.sh
+          ./scripts/sonar-scanner-script.sh
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          # Optionally, you can pass SonarQube credentials as secrets for security
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
