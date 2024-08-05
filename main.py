@@ -40,3 +40,5 @@ elif secim == "4":
         print(f"{sayi1} / {sayi2} = {sonuc}")
 else:
     print("Geçersiz seçim. Lütfen 1, 2, 3 veya 4 girin.")
+
+print("bomba")
